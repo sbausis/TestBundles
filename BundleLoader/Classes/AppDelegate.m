@@ -18,36 +18,83 @@
 
 @implementation AppDelegate
 
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    NSLog(@"%s", __FUNCTION__);
+-(NSArray*)getPlugins {
+    
+    NSMutableArray* newPlugins = [[NSMutableArray alloc] init];
     
     NSString *pluginPath = [[NSBundle mainBundle] builtInPlugInsPath];
-    NSLog(@"pluginPath : %@", pluginPath);
+    if (pluginPath) {
+        NSLog(@"pluginPath : %@", pluginPath);
+        
+        NSArray* extensions = [NSArray arrayWithObjects:@"bundle", @"plugin", @"framework", nil];
+        for (NSString* ext in extensions) {
+            NSLog(@"extension : %@", ext);
+            
+            NSArray *bundlesArray = [NSBundle pathsForResourcesOfType:ext inDirectory:pluginPath];
+            NSLog(@"bundlesArray : %@", bundlesArray);
+            
+            for (NSString* bundlePath in bundlesArray) {
+                NSLog(@"bundlePath : %@", bundlePath);
+                
+                NSBundle *bundle = [NSBundle bundleWithPath:bundlePath];
+                NSLog(@"bundle : %@", bundle);
+                
+                NSLog(@"bundleClass description : %@", [[bundle principalClass] description]);
+                
+                Class bundleClass = [bundle principalClass];
+                NSLog(@"bundleClass : %@", bundleClass);
+                
+                [newPlugins addObject:bundleClass];
+            }
+        }
+    }
     
-    NSArray *bundlesArray = [NSBundle pathsForResourcesOfType:@"bundle" inDirectory:pluginPath];
-    NSLog(@"bundlesArray : %@", bundlesArray);
+    return [NSArray arrayWithArray:newPlugins];
+}
+-(void)initPlugins {
     
-    NSString * lastBundle = [bundlesArray lastObject];
-    NSLog(@"lastBundle : %@", lastBundle);
+    NSArray* classes = [self getPlugins];
+    for (Class pluginClass in classes) {
+        
+        id pluginInstance = [[pluginClass alloc] init];
+        NSLog(@"bundleInstance : %@", pluginInstance);
+        
+        if ([pluginInstance conformsToProtocol:@protocol(AppPluginProtocol_Service)]) {
+            NSLog(@"conformsToProtocol : %@", @protocol(AppPluginProtocol_Service));
+            id<AppPluginProtocol_Service> serviceInstance = (id<AppPluginProtocol_Service>)pluginInstance;
+            serviceInstance = [serviceInstance initServiceWithContext:self];
+        }
+        else if ([pluginInstance conformsToProtocol:@protocol(AppPluginProtocol_Helper)]) {
+            NSLog(@"conformsToProtocol : %@", @protocol(AppPluginProtocol_Helper));
+            id<AppPluginProtocol_Helper> helperInstance = (id<AppPluginProtocol_Helper>)pluginInstance;
+            helperInstance = [helperInstance initHelperWithContext:self];
+            
+        }
+        else if ([pluginInstance conformsToProtocol:@protocol(AppPluginProtocol)]) {
+            NSLog(@"conformsToProtocol : %@", @protocol(AppPluginProtocol));
+            id<AppPluginProtocol> bundleInstance = (id<AppPluginProtocol>)pluginInstance;
+            NSInteger zInt = [bundleInstance addOneInteger:100 toAnother:23];
+            NSLog(@"zInt : %ld",(long)zInt);
+            
+        }
+        
+    }
     
-    NSBundle *bundle = [NSBundle bundleWithPath:lastBundle];
-    NSLog(@"bundle : %@", bundle);
+}
+
+- (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     
-    NSLog(@"bundleClass description : %@", [[bundle principalClass] description]);
-    Class bundleClass = [bundle principalClass];
-    NSLog(@"bundleClass : %@", bundleClass);
-    
-    id bundleInstance = [[bundleClass alloc] init];
-    NSLog(@"bundleInstance : %@", bundleInstance);
-    
-    NSInteger zInt = [bundleInstance addOneInteger:100 toAnother:23];
-    NSLog(@"zInt : %ld",(long)zInt);
+    [self initPlugins];
     
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
     NSLog(@"%s", __FUNCTION__);
     
+}
+
+-(BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender {
+    return TRUE;
 }
 
 @end

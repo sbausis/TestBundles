@@ -11,6 +11,7 @@
 @implementation BundleClass
 
 - (NSInteger)addOneInteger:(NSInteger)pInt1 toAnother:(NSInteger)pInt2 {
+    NSLog(@"%s", __FUNCTION__);
     NSInteger zIntResult = pInt1 + pInt2;
     return zIntResult;
 }
