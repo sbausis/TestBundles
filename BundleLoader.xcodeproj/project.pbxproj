@@ -13,6 +13,8 @@
 		47AA4D4219F536AD007C3961 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47AA4D4019F536AD007C3961 /* MainMenu.xib */; };
 		47AA4D4E19F536AD007C3961 /* BundleLoaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 47AA4D4D19F536AD007C3961 /* BundleLoaderTests.m */; };
 		47AA4D7319F536E9007C3961 /* Bundle.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 47AA4D6F19F536CB007C3961 /* Bundle.bundle */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		47AA4DC619F53CDF007C3961 /* BundleService.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 47AA4DB719F53C25007C3961 /* BundleService.bundle */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		47AA4DC719F53CE3007C3961 /* BundleHelper.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 47AA4D9E19F53C15007C3961 /* BundleHelper.bundle */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +39,34 @@
 			remoteGlobalIDString = 47AA4D5F19F536CA007C3961;
 			remoteInfo = Bundle;
 		};
+		47AA4D9D19F53C15007C3961 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 47AA4D9919F53C14007C3961 /* BundleHelper.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 47AA4D8F19F53C14007C3961;
+			remoteInfo = BundleHelper;
+		};
+		47AA4DB619F53C25007C3961 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 47AA4DB219F53C24007C3961 /* BundleService.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 47AA4DA819F53C24007C3961;
+			remoteInfo = BundleService;
+		};
+		47AA4DC219F53CD5007C3961 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 47AA4DB219F53C24007C3961 /* BundleService.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 47AA4DA719F53C24007C3961;
+			remoteInfo = BundleService;
+		};
+		47AA4DC419F53CD8007C3961 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 47AA4D9919F53C14007C3961 /* BundleHelper.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 47AA4D8E19F53C14007C3961;
+			remoteInfo = BundleHelper;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -46,6 +76,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				47AA4DC719F53CE3007C3961 /* BundleHelper.bundle in CopyFiles */,
+				47AA4DC619F53CDF007C3961 /* BundleService.bundle in CopyFiles */,
 				47AA4D7319F536E9007C3961 /* Bundle.bundle in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -65,6 +97,10 @@
 		47AA4D4D19F536AD007C3961 /* BundleLoaderTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BundleLoaderTests.m; sourceTree = "<group>"; };
 		47AA4D6A19F536CA007C3961 /* Bundle.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Bundle.xcodeproj; path = Bundle/Bundle.xcodeproj; sourceTree = "<group>"; };
 		47AA4D8019F53B9A007C3961 /* AppPluginProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppPluginProtocol.h; sourceTree = "<group>"; };
+		47AA4D8219F53BBC007C3961 /* AppPluginProtocol_Service.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppPluginProtocol_Service.h; sourceTree = "<group>"; };
+		47AA4D8319F53BBC007C3961 /* AppPluginProtocol_Helper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppPluginProtocol_Helper.h; sourceTree = "<group>"; };
+		47AA4D9919F53C14007C3961 /* BundleHelper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BundleHelper.xcodeproj; path = BundleHelper/BundleHelper.xcodeproj; sourceTree = "<group>"; };
+		47AA4DB219F53C24007C3961 /* BundleService.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BundleService.xcodeproj; path = BundleService/BundleService.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +124,8 @@
 		47AA4D2B19F536AD007C3961 = {
 			isa = PBXGroup;
 			children = (
+				47AA4DB219F53C24007C3961 /* BundleService.xcodeproj */,
+				47AA4D9919F53C14007C3961 /* BundleHelper.xcodeproj */,
 				47AA4D6A19F536CA007C3961 /* Bundle.xcodeproj */,
 				47AA4D3619F536AD007C3961 /* BundleLoader */,
 				47AA4D4A19F536AD007C3961 /* BundleLoaderTests */,
@@ -152,11 +190,29 @@
 		47AA4D7F19F53B2B007C3961 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				47AA4D8219F53BBC007C3961 /* AppPluginProtocol_Service.h */,
+				47AA4D8319F53BBC007C3961 /* AppPluginProtocol_Helper.h */,
 				47AA4D8019F53B9A007C3961 /* AppPluginProtocol.h */,
 				47AA4D3B19F536AD007C3961 /* AppDelegate.h */,
 				47AA4D3C19F536AD007C3961 /* AppDelegate.m */,
 			);
 			path = Classes;
+			sourceTree = "<group>";
+		};
+		47AA4D9A19F53C14007C3961 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				47AA4D9E19F53C15007C3961 /* BundleHelper.bundle */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		47AA4DB319F53C24007C3961 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				47AA4DB719F53C25007C3961 /* BundleService.bundle */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -174,6 +230,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				47AA4DC519F53CD8007C3961 /* PBXTargetDependency */,
+				47AA4DC319F53CD5007C3961 /* PBXTargetDependency */,
 				47AA4D7119F536D9007C3961 /* PBXTargetDependency */,
 			);
 			name = BundleLoader;
@@ -233,6 +291,14 @@
 					ProductGroup = 47AA4D6B19F536CA007C3961 /* Products */;
 					ProjectRef = 47AA4D6A19F536CA007C3961 /* Bundle.xcodeproj */;
 				},
+				{
+					ProductGroup = 47AA4D9A19F53C14007C3961 /* Products */;
+					ProjectRef = 47AA4D9919F53C14007C3961 /* BundleHelper.xcodeproj */;
+				},
+				{
+					ProductGroup = 47AA4DB319F53C24007C3961 /* Products */;
+					ProjectRef = 47AA4DB219F53C24007C3961 /* BundleService.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -248,6 +314,20 @@
 			fileType = wrapper.cfbundle;
 			path = Bundle.bundle;
 			remoteRef = 47AA4D6E19F536CB007C3961 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		47AA4D9E19F53C15007C3961 /* BundleHelper.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = BundleHelper.bundle;
+			remoteRef = 47AA4D9D19F53C15007C3961 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		47AA4DB719F53C25007C3961 /* BundleService.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = BundleService.bundle;
+			remoteRef = 47AA4DB619F53C25007C3961 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -301,6 +381,16 @@
 			isa = PBXTargetDependency;
 			name = Bundle;
 			targetProxy = 47AA4D7019F536D9007C3961 /* PBXContainerItemProxy */;
+		};
+		47AA4DC319F53CD5007C3961 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = BundleService;
+			targetProxy = 47AA4DC219F53CD5007C3961 /* PBXContainerItemProxy */;
+		};
+		47AA4DC519F53CD8007C3961 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = BundleHelper;
+			targetProxy = 47AA4DC419F53CD8007C3961 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

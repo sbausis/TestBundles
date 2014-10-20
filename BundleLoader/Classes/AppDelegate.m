@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import "AppPluginProtocol.h"
+#import "AppPluginProtocol_Helper.h"
+#import "AppPluginProtocol_Service.h"
 
 @interface AppDelegate ()
 
@@ -17,25 +19,35 @@
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+    NSLog(@"%s", __FUNCTION__);
     
-    NSString *zStrPlugInsPath = [[NSBundle mainBundle] builtInPlugInsPath];
-    NSArray *zAryBundlePaths = [NSBundle pathsForResourcesOfType:@"bundle"
-                                                     inDirectory:zStrPlugInsPath];
+    NSString *pluginPath = [[NSBundle mainBundle] builtInPlugInsPath];
+    NSLog(@"pluginPath : %@", pluginPath);
     
-    NSString * zStrPathToPlugin = [zAryBundlePaths lastObject];
-    NSBundle *znsBundlePlugin = [NSBundle bundleWithPath:zStrPathToPlugin];
+    NSArray *bundlesArray = [NSBundle pathsForResourcesOfType:@"bundle" inDirectory:pluginPath];
+    NSLog(@"bundlesArray : %@", bundlesArray);
     
-    // instantiate the principal class and call the method
-    Class zPrincipalClass = [znsBundlePlugin principalClass];
-    id zPrincipalClassObj = [[zPrincipalClass alloc]init];
+    NSString * lastBundle = [bundlesArray lastObject];
+    NSLog(@"lastBundle : %@", lastBundle);
     
-    NSInteger zInt = [zPrincipalClassObj addOneInteger:100 toAnother:23];
-    NSLog(@"BaseAppAppDelegate zInt = %ld",(long)zInt);	
+    NSBundle *bundle = [NSBundle bundleWithPath:lastBundle];
+    NSLog(@"bundle : %@", bundle);
+    
+    NSLog(@"bundleClass description : %@", [[bundle principalClass] description]);
+    Class bundleClass = [bundle principalClass];
+    NSLog(@"bundleClass : %@", bundleClass);
+    
+    id bundleInstance = [[bundleClass alloc] init];
+    NSLog(@"bundleInstance : %@", bundleInstance);
+    
+    NSInteger zInt = [bundleInstance addOneInteger:100 toAnother:23];
+    NSLog(@"zInt : %ld",(long)zInt);
     
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
-    // Insert code here to tear down your application
+    NSLog(@"%s", __FUNCTION__);
+    
 }
 
 @end
